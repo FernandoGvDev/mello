@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
+import { dadosEmpresa } from "../../../assets/dados";
 
 export default function CTAFinal() {
   return (
@@ -20,12 +21,12 @@ export default function CTAFinal() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-lg mb-10 text-white/90 max-w-2xl mx-auto"
         >
-          Há 45 anos criando móveis exclusivos com alta durabilidade, design
+          Há 31 anos criando móveis exclusivos com alta durabilidade, design
           personalizado e acabamento impecável. Solicite seu orçamento gratuito.
         </motion.p>
 
         <motion.a
-          href="https://wa.me/555591200892"
+          href={dadosEmpresa.whatsapp.link}
           target="_blank"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}

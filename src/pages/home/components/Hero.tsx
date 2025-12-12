@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
+import imgemHero from "../../../assets/img/proj12.jpeg";
 
 export default function Hero() {
   return (
@@ -66,7 +67,7 @@ export default function Hero() {
           className="flex justify-center"
         >
           <img
-            src="/banner.jpeg"
+            src={imgemHero}
             alt="Móveis planejados Móveis Mello"
             className="rounded-2xl shadow-xl w-full max-w-md md:max-w-lg"
           />

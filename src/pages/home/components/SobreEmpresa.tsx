@@ -1,62 +1,71 @@
 import { motion } from "framer-motion";
+import img from "../../../assets/img/proj32.jpeg";
 
 export default function SobreEmpresa() {
   return (
-    <section className="w-full py-20 bg-[#F8F2EC]">
-      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+    <section className="w-full py-24 bg-[#F8F2EC] relative overflow-hidden">
+      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center relative z-10">
 
         {/* IMAGEM */}
         <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, x: -40, filter: "blur(6px)" }}
+          whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
           viewport={{ once: true }}
+          className="relative"
         >
           <img
-            src="/banner.jpeg" // coloque uma imagem real da empresa ou projeto
-            className="rounded-2xl shadow-lg object-cover w-full h-[380px]"
+            src={img}
+            className="rounded-3xl shadow-xl object-cover w-full h-[420px] border border-[#5A1F1A]/10"
             alt="Moveis Mello - Marcenaria"
           />
+
+          {/* Ornamentação suave */}
+          <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#5A1F1A]/10 rounded-full blur-2xl"></div>
         </motion.div>
 
         {/* TEXTO */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
+          transition={{ duration: 0.9, delay: 0.1, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-7"
         >
-          <h2 className="text-3xl font-bold text-[#5A1F1A]">
-            Sobre a Moveis Mello
-          </h2>
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#5A1F1A]">
+              Sobre a Móveis Mello
+            </h2>
+            <div className="w-16 h-1 mt-2 bg-[#7A2E24] rounded-full"></div>
+          </div>
 
           <p className="text-lg text-[#5A1F1A]/80 leading-relaxed">
             Há <span className="font-semibold text-[#5A1F1A]">45 anos</span>,
-            a Moveis Mello transforma espaços em ambientes únicos,
-            produzindo móveis sob medida com excelência, tradição e
-            atenção aos mínimos detalhes.
+            somos referência na criação de móveis planejados que unem
+            estética, funcionalidade e durabilidade. Cada projeto é
+            desenvolvido sob medida para refletir a personalidade e as
+            necessidades de cada cliente.
           </p>
 
           <p className="text-lg text-[#5A1F1A]/80 leading-relaxed">
-            Nosso compromisso é entregar qualidade superior, durabilidade e
-            projetos que refletem o estilo de vida de cada cliente. Unimos
-            tecnologia, design e marcenaria especializada para criar móveis
-            exclusivos que valorizam seu lar.
+            Trabalhamos com materiais premium, tecnologia de precisão e
+            acabamento artesanal que garantem um resultado impecável em
+            qualquer ambiente: cozinhas, quartos, salas, escritórios ou
+            espaços corporativos.
           </p>
 
           <p className="text-lg text-[#5A1F1A]/80 leading-relaxed">
-            Cada peça é produzida com materiais selecionados, garantindo
-            acabamento impecável, precisão nas medidas e uma experiência de
-            alto padrão do início ao fim do projeto.
+            Nosso compromisso é entregar uma experiência completa — do
+            planejamento ao pós-entrega — com atendimento próximo,
+            pontualidade e excelência em cada etapa.
           </p>
 
           <motion.button
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-4 w-fit bg-[#5A1F1A] text-white px-6 py-3 rounded-xl font-medium shadow-md"
+            whileTap={{ scale: 0.97 }}
+            className="mt-4 w-fit bg-[#7A2E24] text-white px-7 py-3 rounded-xl font-medium shadow-lg"
           >
-            Conhecer nossos projetos
+            Ver projetos realizados
           </motion.button>
         </motion.div>
 
