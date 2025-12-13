@@ -1,87 +1,94 @@
 import { useEffect, useMemo, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, FreeMode } from "swiper/modules";
+import { motion } from "framer-motion";
 
-// Importação automática das imagens da pasta
+// Importação automática das imagens
 const imagens = import.meta.glob("/src/assets/img/*.{jpg,png,jpeg,webp}", {
   eager: true,
 });
 
-// Converte os módulos em lista de URLs
+// Lista de URLs
 const listaImagens: string[] = Object.values(imagens).map(
   (mod: any) => mod.default
 );
 
-// Função para embaralhar array
+// Embaralha imagens (cada linha diferente)
 function shuffleArray(arr: string[]) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+    [copy[i], copy[j]] = [copy[j], copy[i]];
   }
-  return a;
+  return copy;
 }
 
-function LinhaCarrossel({ reverse = false, onImageClick }: any) {
-  const controls = useAnimation();
-  const [paused, setPaused] = useState(false);
-  const velocidade = 55;
-
-  // Cada carrossel recebe uma ordem diferente
-  const imagensAleatorias = useMemo(() => shuffleArray(listaImagens), []);
-
-  const startAnimation = () => {
-    controls.start({
-      x: reverse ? "0%" : "-100%",
-      transition: {
-        repeat: Infinity,
-        ease: "linear",
-        duration: velocidade,
-      },
-    });
-  };
-
-  useEffect(() => {
-    if (!paused) startAnimation();
-    if (paused) controls.stop();
-  }, [paused]);
+function LinhaCarrossel({
+  reverse = false,
+  onImageClick,
+}: {
+  reverse?: boolean;
+  onImageClick: (img: string) => void;
+}) {
+  const imagensAleatorias = useMemo(
+    () => shuffleArray(listaImagens),
+    []
+  );
 
   return (
-    <div
-      className="overflow-hidden py-4 select-none"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onTouchStart={() => setPaused(true)}
-      onTouchEnd={() => setPaused(false)}
-    >
-      <motion.div
-        animate={controls}
-        className="flex gap-4"
-        style={{
-          x: reverse ? "-100%" : "0%",
+    <div className="py-4 select-none">
+      <Swiper
+        modules={[Autoplay, FreeMode]}
+        slidesPerView="auto"
+        spaceBetween={16}
+        loop={true}
+        freeMode={{
+          enabled: true,
+          momentum: false,
+        }}
+        speed={6000}
+        autoplay={{
+          delay: 0,
+          disableOnInteraction: false,
+          reverseDirection: reverse,
+        }}
+        grabCursor={true}
+        className="overflow-visible"
+
+        // ✅ CORREÇÃO DO AUTOPLAY NO MOBILE
+        onTouchStart={(swiper) => {
+          swiper.autoplay.stop();
+        }}
+        onTouchEnd={(swiper) => {
+          swiper.autoplay.start();
         }}
       >
+
         {[...imagensAleatorias, ...imagensAleatorias].map((img, i) => (
-          <div
+          <SwiperSlide
             key={i}
-            className="min-w-[300px] h-[200px] rounded-xl overflow-hidden shadow-lg cursor-pointer"
-            onClick={() => onImageClick(img)}
+            className="!w-[300px] !h-[200px] rounded-xl overflow-hidden shadow-lg cursor-pointer"
           >
-            <img src={img} className="w-full h-full object-cover" />
-          </div>
+
+            <img
+              src={img}
+              className="w-full h-full object-cover"
+              onClick={() => onImageClick(img)}
+            />
+          </SwiperSlide>
         ))}
-      </motion.div>
+      </Swiper>
     </div>
   );
 }
 
 export default function ProjetosCarrossel() {
-  const [imagemSelecionada, setImagemSelecionada] = useState<string | null>(null);
+  const [imagemSelecionada, setImagemSelecionada] =
+    useState<string | null>(null);
 
-  // Fecha imagem ao apertar back no celular
+  // Fecha lightbox no botão voltar (mobile)
   useEffect(() => {
-    const handleBack = () => {
-      setImagemSelecionada(null);
-    };
+    const handleBack = () => setImagemSelecionada(null);
 
     if (imagemSelecionada) {
       history.pushState(null, "", location.href);
@@ -99,11 +106,12 @@ export default function ProjetosCarrossel() {
         Nossos Projetos
       </h2>
 
+      {/* 3 linhas – direções alternadas */}
       <LinhaCarrossel reverse={false} onImageClick={setImagemSelecionada} />
       <LinhaCarrossel reverse={true} onImageClick={setImagemSelecionada} />
       <LinhaCarrossel reverse={false} onImageClick={setImagemSelecionada} />
 
-      {/* LIGHTBOX FULLSCREEN */}
+      {/* LIGHTBOX */}
       {imagemSelecionada && (
         <div
           className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50 p-4"
@@ -111,9 +119,8 @@ export default function ProjetosCarrossel() {
         >
           <motion.img
             src={imagemSelecionada}
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
             className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-xl"
             onClick={(e) => e.stopPropagation()}
           />
