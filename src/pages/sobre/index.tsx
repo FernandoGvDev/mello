@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaCogs, FaRulerCombined, FaCheckCircle, FaWhatsapp } from "react-icons/fa";
+import { FaCogs, FaWhatsapp } from "react-icons/fa";
 
 const IMAGES = {
   hero: "/banner.jpeg", // imagem do fundo do hero (oficina / CNC)
@@ -23,11 +23,8 @@ export default function Sobre() {
       <SectionContainer>
         <SobreEmpresa />
         <Processo />
-        <Diferenciais />
         <MaquinasEAcabamento />
         <Equipe />
-        <Certificacoes />
-        <Depoimentos />
       </SectionContainer>
       <CTA />
     </main>
@@ -194,30 +191,6 @@ function Processo() {
 }
 
 /* -------------------------
-   DIFERENCIAIS TECNICOS
-   ------------------------- */
-
-function Diferenciais() {
-  const itens = [
-    { icon: <FaRulerCombined />, title: "Personalização Total", desc: "Cada projeto é planejado exclusivamente para você." },
-    { icon: <FaCogs />, title: "Acabamento de Alta Qualidade", desc: "Detalhes bem feitos e duráveis, que valorizam o ambiente." },
-    { icon: <FaCheckCircle />, title: "Atendimento Próximo", desc: "Acompanhamento em todas as etapas para sua tranquilidade." },
-  ];
-
-  return (
-    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-3 gap-6">
-      {itens.map((it, i) => (
-        <motion.div key={it.title} variants={fadeUp as any} custom={i} className="bg-[#0e0f10] p-6 rounded-xl border border-white/6 shadow">
-          <div className="text-2xl text-[#7A2E24] mb-3">{it.icon}</div>
-          <div className="font-semibold text-white mb-2">{it.title}</div>
-          <p className="text-gray-400 text-sm">{it.desc}</p>
-        </motion.div>
-      ))}
-    </motion.div>
-  );
-}
-
-/* -------------------------
    MAQUINAS E ACABAMENTO
    ------------------------- */
 
@@ -269,83 +242,65 @@ function MaquinasEAcabamento() {
 
 function Equipe() {
   const membros = [
-    { nome: "Profissionais experientes", cargo: "Equipe dedicada ao cuidado em cada etapa" },
-    { nome: "Especialistas em design", cargo: "Transformamos sua ideia em um projeto harmonioso" },
-    { nome: "Equipe de montagem", cargo: "Instalação limpa, organizada e precisa" },
+    {
+      titulo: "Profissionais experientes",
+      descricao: "Equipe dedicada ao cuidado em cada etapa do projeto",
+    },
+    {
+      titulo: "Especialistas em design",
+      descricao: "Transformamos sua ideia em um projeto funcional e harmonioso",
+    },
+    {
+      titulo: "Equipe de montagem",
+      descricao: "Instalação precisa, limpa e organizada no seu ambiente",
+    },
   ];
 
   return (
-    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-6">
-      <motion.h3 variants={fadeUp as any} custom={0} className="text-xl font-semibold">
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="space-y-10"
+    >
+      <motion.h3
+        variants={fadeUp as any}
+        custom={0}
+        className="text-xl font-semibold text-gray-800"
+      >
         Quem cuida do seu projeto
       </motion.h3>
 
-      <div className="flex flex-wrap gap-4">
-        {membros.map((m, i) => (
-          <motion.div key={i} variants={fadeUp as any} custom={i + 1} className="bg-[#0f1113] p-4 rounded-xl border border-white/6 w-full sm:w-1/3">
-            <div className="font-semibold text-white">{m.nome}</div>
-            <div className="text-sm text-gray-400">{m.cargo}</div>
-          </motion.div>
-        ))}
+      {/* Container */}
+      <div className="relative">
+        {/* Linha */}
+        <div className="absolute left-3 md:left-0 top-0 md:top-1/2 md:-translate-y-1/2 h-full md:h-px w-px md:w-full bg-white/10" />
+
+        <div className="flex flex-col md:flex-row gap-10 md:gap-0">
+          {membros.map((item, i) => (
+            <motion.div
+              key={i}
+              variants={fadeUp as any}
+              custom={i + 1}
+              className="relative md:w-1/3 pl-10 md:pl-0 text-left md:text-center"
+            >
+              {/* Número */}
+              <span className="text-xs text-gray-800 tracking-widest">
+                0{i + 1}
+              </span>
+
+              <h4 className="mt-2 font-semibold text-gray-800">
+                {item.titulo}
+              </h4>
+
+              <p className="mt-1 text-sm text-gray-600 max-w-xs md:mx-auto">
+                {item.descricao}
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </motion.div>
-  );
-}
-
-/* -------------------------
-   CERTIFICAÇÕES
-   ------------------------- */
-
-function Certificacoes() {
-  const itens = [
-    { title: "Confiança Reconhecida", text: "Clientes que voltam e indicam mostram a qualidade do nosso trabalho." },
-    { title: "Parcerias Sólidas", text: "Trabalhamos com fornecedores confiáveis e materiais de alto padrão." },
-  ];
-
-  return (
-    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-4">
-      <motion.h3 variants={fadeUp as any} custom={0} className="text-xl font-semibold">
-        Credibilidade & Confiança
-      </motion.h3>
-
-      <div className="flex flex-wrap gap-4">
-        {itens.map((it, i) => (
-          <motion.div key={it.title} variants={fadeUp as any} custom={i + 1} className="bg-[#0e0f10] p-4 rounded-lg border border-white/6 shadow-sm w-full sm:w-1/2">
-            <div className="font-semibold text-white">{it.title}</div>
-            <p className="text-gray-400 text-sm">{it.text}</p>
-          </motion.div>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
-
-/* -------------------------
-   DEPOIMENTOS (breve)
-   ------------------------- */
-
-function Depoimentos() {
-  const depo = [
-    { nome: "Mariana Silva", texto: "Acabamento técnico impecável e projeto 3D que ajudou a visualizar tudo." },
-    { nome: "Carlos Almeida", texto: "Precisão nos cortes e montagem muito bem feita." },
-    { nome: "Ana Paula", texto: "Equipe técnica muito qualificada — entrega no prazo." },
-  ];
-
-  return (
-    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-6">
-      <motion.h3 variants={fadeUp as any} custom={0} className="text-xl font-semibold">
-        O que clientes técnicos dizem
-      </motion.h3>
-
-      <div className="grid md:grid-cols-3 gap-4">
-        {depo.map((d, i) => (
-          <motion.div key={i} variants={fadeUp as any} custom={i + 1} className="bg-[#0f1113] p-5 rounded-xl border border-white/6">
-            <div className="font-semibold text-white mb-2">{d.nome}</div>
-            <div className="text-gray-400 text-sm leading-relaxed">{d.texto}</div>
-          </motion.div>
-        ))}
-      </div>
-    </motion.div>
+    </motion.section>
   );
 }
 

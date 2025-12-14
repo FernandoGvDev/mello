@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
-import imgemHero from "../../../assets/img/proj12.jpeg";
+import imgemHero from "../../../assets/img/proj12.webp";
 
 export default function Hero() {
   return (

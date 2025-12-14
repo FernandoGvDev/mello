@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import img from "../../../assets/img/proj32.jpeg";
+import img from "../../../assets/img/proj32.webp";
+import { Link } from "react-router-dom";
 
 export default function SobreEmpresa() {
   return (
@@ -60,13 +61,15 @@ export default function SobreEmpresa() {
             pontualidade e excelência em cada etapa.
           </p>
 
-          <motion.button
+          <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             className="mt-4 w-fit bg-[#7A2E24] text-white px-7 py-3 rounded-xl font-medium shadow-lg"
           >
+            <Link to="/projetos">
             Ver projetos realizados
-          </motion.button>
+            </Link>
+          </motion.div>
         </motion.div>
 
       </div>

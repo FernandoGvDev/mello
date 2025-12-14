@@ -1,5 +1,6 @@
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { dadosEmpresa } from "../assets/dados";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -9,9 +10,9 @@ export default function Footer() {
         {/* Logo e Descrição */}
         <div className="flex flex-col gap-4">
           <img
-            src="/logo.png"
+            src="/Logo.jpeg"
             alt="Moveis Mello"
-            className="w-36"
+            className="w-19 rounded-2xl shadow-lg"
           />
           <p className="text-white/80 leading-relaxed">
             Há 45 anos produzindo móveis sob medida com tradição, qualidade e
@@ -23,10 +24,9 @@ export default function Footer() {
         <div>
           <h3 className="font-semibold text-lg mb-4">Navegação</h3>
           <ul className="flex flex-col gap-2 text-white/80">
-            <li><a href="#servicos" className="hover:text-white">Serviços</a></li>
-            <li><a href="#projetos" className="hover:text-white">Projetos</a></li>
-            <li><a href="#sobre" className="hover:text-white">Sobre</a></li>
-            <li><a href="#contato" className="hover:text-white">Contato</a></li>
+            <li><Link to="/" className="hover:text-white">Inicio</Link></li>
+            <li><Link to="/projetos" className="hover:text-white">Projetos</Link></li>
+            <li><Link to="/sobre" className="hover:text-white">Sobre</Link></li>
           </ul>
         </div>
 
