@@ -2,8 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-export default function CategoriasProjetos() {
-  const itens = [
+ const itens = [
     {
       nome: "Cozinha Planejada",
       img: "/cozinha.jpg",
@@ -30,47 +29,35 @@ export default function CategoriasProjetos() {
     },
   ];
 
+export default function CategoriasProjetos() {
   const [index, setIndex] = useState(0);
 
-  const next = () => {
-    setIndex((prev) => (prev + 1) % itens.length);
-  };
-
-  const prev = () => {
-    setIndex((prev) => (prev - 1 + itens.length) % itens.length);
-  };
-
   const calcularItensVisiveis = () => {
-    if (window.innerWidth < 640) return 1; // mobile
-    if (window.innerWidth < 1024) return 2; // tablet
-    return 3; // desktop
+    if (window.innerWidth < 640) return 1;
+    if (window.innerWidth < 1024) return 2;
+    return 3;
   };
 
   const visiveis = calcularItensVisiveis();
-
   const sliceItens = [...itens, ...itens].slice(index, index + visiveis);
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-20 relative">
-      {/* Título */}
+    <section className="max-w-7xl mx-auto px-6 py-20">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="text-3xl font-semibold text-center mb-10"
+        className="text-3xl font-semibold text-center mb-12 text-[#2a0d0b]"
       >
-        Móveis sob medida que produzimos
+        Tipos de móveis sob medida que produzimos
       </motion.h2>
 
-      {/* Carrossel */}
       <div className="relative flex items-center">
-        {/* Botão Esquerda */}
         <button
-          onClick={prev}
-          className="absolute left-0 z-10 bg-[#2a0d0b] text-white p-3 rounded-full shadow-lg hover:opacity-80 transition hidden sm:flex"
+          onClick={() => setIndex((prev) => (prev - 1 + itens.length) % itens.length)}
+          className="absolute left-0 z-10 bg-[#2a0d0b] text-white p-3 rounded-full hidden sm:flex"
         >
-          <FaChevronLeft size={18} />
+          <FaChevronLeft />
         </button>
 
         <div className="w-full overflow-hidden">
@@ -79,15 +66,15 @@ export default function CategoriasProjetos() {
               {sliceItens.map((item) => (
                 <motion.div
                   key={item.nome}
-                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
                   transition={{ duration: 0.4 }}
-                  className="min-w-[280px] md:min-w-[320px] lg:min-w-[360px] bg-white rounded-xl shadow-lg overflow-hidden"
+                  className="min-w-[300px] bg-white rounded-xl shadow-lg overflow-hidden"
                 >
                   <img
                     src={item.img}
-                    alt={item.nome}
+                    alt={`${item.nome} realizado pela Móveis Mello no RS`}
                     className="w-full h-56 object-cover"
                   />
                   <div className="p-4 text-center font-medium text-[#2a0d0b]">
@@ -99,12 +86,11 @@ export default function CategoriasProjetos() {
           </div>
         </div>
 
-        {/* Botão Direita */}
         <button
-          onClick={next}
-          className="absolute right-0 z-10 bg-[#2a0d0b] text-white p-3 rounded-full shadow-lg hover:opacity-80 transition hidden sm:flex"
+          onClick={() => setIndex((prev) => (prev + 1) % itens.length)}
+          className="absolute right-0 z-10 bg-[#2a0d0b] text-white p-3 rounded-full hidden sm:flex"
         >
-          <FaChevronRight size={18} />
+          <FaChevronRight />
         </button>
       </div>
     </section>

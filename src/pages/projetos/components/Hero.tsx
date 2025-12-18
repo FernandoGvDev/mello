@@ -10,40 +10,25 @@ export default function HeroProjetos() {
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40"></div>
+      <div className="absolute inset-0 bg-black/50" />
 
       {/* Conteúdo */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: "easeOut" }}
-        className="relative z-10 text-center px-6"
+        className="relative z-10 text-center px-6 max-w-4xl"
       >
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="text-4xl md:text-6xl font-bold text-white tracking-wide"
-        >
-          Projetos
-        </motion.h1>
+        <h1 className="text-4xl md:text-6xl font-bold text-white">
+          Projetos de Móveis Sob Medida
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-lg md:text-2xl text-white/80 mt-4"
-        >
-          Confira nosso trabalho
-        </motion.p>
+        <p className="text-lg md:text-2xl text-white/85 mt-6">
+          Cozinhas, quartos, closets e ambientes planejados realizados pela
+          Móveis Mello no Rio Grande do Sul
+        </p>
 
-        {/* Linha decorativa */}
-        <motion.div
-          initial={{ width: 0, opacity: 0 }}
-          animate={{ width: 320, opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1.0 }}
-          className="h-[2px] bg-white mx-auto mt-6"
-        />
+        <div className="w-40 h-[2px] bg-white mx-auto mt-10" />
       </motion.div>
     </section>
   );

@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import img from "../../../assets/img/proj32.webp";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 export default function SobreEmpresa() {
@@ -17,11 +17,10 @@ export default function SobreEmpresa() {
         >
           <img
             src={img}
+            alt="Marcenaria Móveis Mello especializada em móveis sob medida no RS"
+            loading="lazy"
             className="rounded-3xl shadow-xl object-cover w-full h-[420px] border border-[#5A1F1A]/10"
-            alt="Moveis Mello - Marcenaria"
           />
-
-          {/* Ornamentação suave */}
           <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#5A1F1A]/10 rounded-full blur-2xl"></div>
         </motion.div>
 
@@ -35,30 +34,21 @@ export default function SobreEmpresa() {
         >
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-[#5A1F1A]">
-              Sobre a Móveis Mello
+              45 anos criando móveis sob medida
             </h2>
             <div className="w-16 h-1 mt-2 bg-[#7A2E24] rounded-full"></div>
           </div>
 
           <p className="text-lg text-[#5A1F1A]/80 leading-relaxed">
-            Há <span className="font-semibold text-[#5A1F1A]">45 anos</span>,
-            somos referência na criação de móveis planejados que unem
-            estética, funcionalidade e durabilidade. Cada projeto é
-            desenvolvido sob medida para refletir a personalidade e as
-            necessidades de cada cliente.
+            Há mais de <strong>45 anos</strong>, a Móveis Mello atua na criação de
+            móveis sob medida, desenvolvendo projetos personalizados que unem
+            estética, funcionalidade e durabilidade.
           </p>
 
           <p className="text-lg text-[#5A1F1A]/80 leading-relaxed">
-            Trabalhamos com materiais premium, tecnologia de precisão e
-            acabamento artesanal que garantem um resultado impecável em
-            qualquer ambiente: cozinhas, quartos, salas, escritórios ou
-            espaços corporativos.
-          </p>
-
-          <p className="text-lg text-[#5A1F1A]/80 leading-relaxed">
-            Nosso compromisso é entregar uma experiência completa — do
-            planejamento ao pós-entrega — com atendimento próximo,
-            pontualidade e excelência em cada etapa.
+            Atuamos desde o projeto em 3D até a fabricação e instalação,
+            utilizando MDF e madeira maciça para atender residências e empresas
+            em todo o Rio Grande do Sul.
           </p>
 
           <motion.div
@@ -66,9 +56,7 @@ export default function SobreEmpresa() {
             whileTap={{ scale: 0.97 }}
             className="mt-4 w-fit bg-[#7A2E24] text-white px-7 py-3 rounded-xl font-medium shadow-lg"
           >
-            <Link to="/projetos">
-            Ver projetos realizados
-            </Link>
+            <Link to="/projetos">Ver projetos realizados</Link>
           </motion.div>
         </motion.div>
 

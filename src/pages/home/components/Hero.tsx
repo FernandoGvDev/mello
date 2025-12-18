@@ -26,7 +26,7 @@ export default function Hero() {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="text-4xl md:text-5xl font-bold leading-tight text-[#7A2E24]"
           >
-            Móveis planejados que elevam seu estilo de vida
+            Móveis sob medida no Rio Grande do Sul
           </motion.h1>
 
           <motion.p
@@ -37,14 +37,16 @@ export default function Hero() {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="mt-5 text-lg md:text-xl max-w-lg"
           >
-            Há 45 anos, produzimos móveis sob medida com excelência,
-            criando ambientes sofisticados, funcionais e feitos para durar.
+            Há mais de 45 anos, a Móveis Mello desenvolve móveis sob medida com
+            projeto personalizado em 3D, fabricação própria e instalação completa
+            para residências e empresas.
           </motion.p>
 
           {/* BOTÃO WHATSAPP */}
           <motion.a
             href="https://wa.me/555591200892"
             target="_blank"
+            rel="noopener noreferrer"
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 }
@@ -55,11 +57,11 @@ export default function Hero() {
             className="mt-8 inline-flex items-center gap-3 bg-[#7A2E24] text-white px-7 py-3 rounded-full shadow-lg text-lg font-medium"
           >
             <FaWhatsapp size={22} />
-            Falar com especialista
+            Solicitar orçamento pelo WhatsApp
           </motion.a>
         </motion.div>
 
-        {/* IMAGEM ILUSTRATIVA */}
+        {/* IMAGEM */}
         <motion.div
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
@@ -68,7 +70,8 @@ export default function Hero() {
         >
           <img
             src={imgemHero}
-            alt="Móveis planejados Móveis Mello"
+            alt="Projeto de móveis sob medida desenvolvido pela Móveis Mello no RS"
+            loading="lazy"
             className="rounded-2xl shadow-xl w-full max-w-md md:max-w-lg"
           />
         </motion.div>

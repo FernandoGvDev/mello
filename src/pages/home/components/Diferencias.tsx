@@ -5,27 +5,27 @@ const items = [
   {
     icon: Award,
     title: "45 anos de experiência",
-    desc: "Tradição e excelência em móveis sob medida, com milhares de projetos entregues.",
+    desc: "Tradição e autoridade na fabricação de móveis sob medida no Rio Grande do Sul.",
   },
   {
     icon: Hammer,
-    title: "Marcenaria Própria",
-    desc: "Produção interna que garante qualidade superior, controle total e acabamento impecável.",
+    title: "Marcenaria própria",
+    desc: "Produção interna que garante controle total de qualidade e acabamento superior.",
   },
   {
     icon: Ruler,
-    title: "Projetos 100% Personalizados",
-    desc: "Cada ambiente é desenhado sob medida para refletir seu estilo e suas necessidades.",
+    title: "Projetos 100% personalizados",
+    desc: "Cada móvel é desenhado sob medida para atender às necessidades do cliente.",
   },
   {
     icon: Clock,
-    title: "Entrega Dentro do Prazo",
-    desc: "Compromisso, organização e responsabilidade em cada etapa do processo.",
+    title: "Entrega dentro do prazo",
+    desc: "Organização e compromisso em todas as etapas do projeto.",
   },
   {
     icon: CheckCircle,
-    title: "Garantia e Suporte",
-    desc: "Acompanhamento após a entrega, assistência e garantia estendida.",
+    title: "Garantia e suporte",
+    desc: "Assistência e acompanhamento mesmo após a entrega do projeto.",
   },
 ];
 
@@ -33,6 +33,7 @@ export default function Diferenciais() {
   return (
     <section className="w-full py-20 bg-white">
       <div className="max-w-6xl mx-auto px-6 text-center">
+
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -40,10 +41,9 @@ export default function Diferenciais() {
           viewport={{ once: true }}
           className="text-3xl font-bold mb-12 text-[#5A1F1A]"
         >
-          Por que escolher a Moveis Mello?
+          Por que escolher a Móveis Mello
         </motion.h2>
 
-        {/* GRID */}
         <div className="grid md:grid-cols-3 gap-10">
           {items.map((item, i) => {
             const Icon = item.icon;
@@ -69,6 +69,7 @@ export default function Diferenciais() {
             );
           })}
         </div>
+
       </div>
     </section>
   );
