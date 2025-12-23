@@ -1,5 +1,6 @@
 import Hero from "./components/Hero";
 import Servicos from "./components/Servicos";
+import SofasSobMedida from "./components/SofasSobMedida";
 import GaleriaProjetos from "./components/GaleriaProjetos";
 import SobreEmpresa from "./components/SobreEmpresa";
 import Diferencias from "./components/Diferencias";
@@ -11,6 +12,7 @@ export default function Home(){
         <>
         <Hero />
         <Servicos />
+        <SofasSobMedida />
         <GaleriaProjetos />
         <SobreEmpresa />
         <Diferencias />
