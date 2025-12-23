@@ -50,13 +50,13 @@ export default function SofasSobMedida() {
           </ul>
 
           <motion.a
-            href="/projetos"
+            href="https://wa.me/555591200892"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 200 }}
             className="inline-block mt-8 bg-[#7A2E24] text-white px-8 py-3 rounded-full shadow-md"
           >
-            Ver sofás realizados
+            Entre em contato pelo WhatsApp
           </motion.a>
         </motion.div>
 
