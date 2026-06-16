@@ -2,6 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  Star,
+  CheckCircle2,
+  Clock3,
+  ShieldCheck,
+  BadgeCheck,
+} from "lucide-react";
 
 const images = [
   "/imgs/cozinhabase.jpg",
@@ -18,15 +25,15 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
-      setIsFirstRender(false); // depois da primeira troca, nunca mais é "primeira"
+      setIsFirstRender(false);
     }, 6000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden">
-      {/* Background slideshow */}
+    <section className="relative w-full min-h-screen overflow-hidden">
+      {/* Background */}
       <AnimatePresence>
         <motion.div
           key={index}
@@ -48,57 +55,100 @@ export default function Hero() {
       </AnimatePresence>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/15" />
 
-      {/* Content Box */}
+      {/* Conteúdo */}
       <div className="relative z-10 h-full flex items-center">
         <motion.div
-          initial={{ opacity: 0, x: -40, scale: 0.95 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-          className="ml-6 bg-[#1f2937]/40 md:bg-[#1f2937]/80 backdrop-blur-md p-6 md:p-10 rounded-2xl text-white shadow-xl mx-4 md:ml-20 max-w-[90%] md:max-w-xl
-"
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mx-5 md:ml-20 max-w-xl rounded-3xl border border-white/10 bg-black/45 backdrop-blur-xl shadow-2xl p-7 md:p-10 text-white"
         >
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="inline-flex items-center gap-2 rounded-full border border-[#d4af37]/30 bg-[#8b0000]/90 px-4 py-2 text-sm font-semibold text-white mb-6 mt-25"
+          >
+            <Star className="w-4 h-4 text-yellow-300 fill-yellow-300" />
+            Há mais de 40 anos realizando sonhos
+          </motion.div>
+
+          {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="text-2xl md:text-4xl font-bold leading-tight mb-4"
+            transition={{ delay: 0.5 }}
+            className="text-3xl md:text-5xl font-extrabold leading-tight"
           >
-            Móveis Planejados que Transformam Seu Espaço
+            Seu <span className="text-[#d4af37]">Móvel Planejado</span>
+            <br />
+            do Jeito que Você Sempre Sonhou.
           </motion.h1>
 
+          {/* Subheadline */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2 }}
-            className="text-sm md:text-lg text-[#f5e6d3] mb-6"
+            transition={{ delay: 0.8 }}
+            className="mt-5 text-base md:text-lg text-gray-200 leading-relaxed"
           >
-            Projetos sob medida que unem beleza, funcionalidade e durabilidade.
+            Transforme sua cozinha, quarto, sala, banheiro ou escritório com
+            móveis planejados feitos sob medida, acabamento impecável e máxima
+            qualidade para valorizar seu ambiente.
           </motion.p>
 
-          <motion.ul
+          {/* Benefícios */}
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.6 }}
-            className="space-y-2 text-sm md:text-base mb-6"
+            transition={{ delay: 1.1 }}
+            className="grid grid-cols-1 gap-3 mt-7"
           >
-            <li>✔ Parcelamento em até 12x</li>
-            <li>✔ Garantia de até 5 anos</li>
-            <li>✔ +40 anos de experiência</li>
-            <li>✔ Qualidade e segurança</li>
-          </motion.ul>
+            <div className="flex items-center gap-3">
+              <CheckCircle2 className="text-green-400 w-5 h-5" />
+              <span>Projeto totalmente personalizado</span>
+            </div>
 
-          <motion.a
-            href="https://wa.me/555591200892"
-            target="_blank"
+            <div className="flex items-center gap-3">
+              <BadgeCheck className="text-green-400 w-5 h-5" />
+              <span>Mais de 40 anos de tradição e qualidade</span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <ShieldCheck className="text-green-400 w-5 h-5" />
+              <span>Garantia de até 5 anos</span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Clock3 className="text-green-400 w-5 h-5" />
+              <span>Parcelamento facilitado</span>
+            </div>
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 2.3 }}
-            className="inline-block bg-[#8b0000] hover:bg-red-800 transition px-6 py-3 rounded-full font-semibold"
+            transition={{ delay: 1.5 }}
+            className="mt-8"
           >
-            Solicitar Orçamento
-          </motion.a>
+            <a
+              href="https://wa.me/555591200892"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center justify-center w-full md:w-auto rounded-full bg-[#8b0000] hover:bg-red-800 px-9 py-4 text-lg font-bold transition-all duration-300 hover:scale-105 shadow-lg shadow-red-900/40"
+            >
+              Receber Meu Orçamento
+            </a>
+
+            <div className="mt-4 flex flex-col md:flex-row gap-2 md:gap-6 text-sm text-gray-300">
+              <span>✓ Atendimento rápido pelo WhatsApp</span>
+              <span>✓ Orçamento sem compromisso</span>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
