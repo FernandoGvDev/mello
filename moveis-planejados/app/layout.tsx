@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
@@ -17,18 +18,14 @@ const geistMono = Geist_Mono({
 
 /* 🔥 SEO GLOBAL */
 export const metadata: Metadata = {
-  /* 🟢 TÍTULO PRINCIPAL (IMPORTANTE PARA GOOGLE) */
   title: {
     default: "Móveis Planejados Mello | Sob Medida com Qualidade e Garantia",
     template: "%s | Móveis Planejados Mello",
-    // 👉 Permite páginas internas tipo: "Projetos | Móveis Planejados Mello"
   },
 
-  /* 🟢 DESCRIÇÃO (APARECE NO GOOGLE) */
   description:
     "Móveis planejados sob medida com mais de 40 anos de experiência. Projetos personalizados para cozinhas, quartos, salas e escritórios. Qualidade, garantia e acabamento impecável.",
 
-  /* 🟢 PALAVRAS-CHAVE (ajuda SEO, mas secundário hoje) */
   keywords: [
     "móveis planejados",
     "móveis sob medida",
@@ -39,13 +36,10 @@ export const metadata: Metadata = {
     "Móveis Mello",
   ],
 
-  /* 🟢 AUTOR */
   authors: [{ name: "Móveis Planejados Mello" }],
 
-  /* 🟢 BASE URL (IMPORTANTE PARA OG E LINKS) */
   metadataBase: new URL("https://moveismello.com.br"),
 
-  /* 🔥 OPEN GRAPH (FACEBOOK, WHATSAPP) */
   openGraph: {
     title: "Móveis Planejados Mello",
     description:
@@ -55,7 +49,6 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/imgs/salabase.png",
-        // ⚠️ CRIE ESSA IMAGEM (1200x630 ideal)
         width: 1200,
         height: 630,
         alt: "Móveis Planejados Mello",
@@ -65,22 +58,19 @@ export const metadata: Metadata = {
     type: "website",
   },
 
-  /* 🔥 TWITTER (compartilhamento) */
   twitter: {
     card: "summary_large_image",
     title: "Móveis Planejados Mello",
     description:
       "Móveis sob medida com qualidade e mais de 40 anos de experiência.",
-    images: ["/imgs/salabase.png"], // ⚠️ mesma imagem do OG
+    images: ["/imgs/salabase.png"],
   },
 
-  /* 🟢 ROBOTS (indexação Google) */
   robots: {
     index: true,
     follow: true,
   },
 
-  /* 🟢 FAVICON */
   icons: {
     icon: "/logo.svg",
   },
@@ -96,16 +86,32 @@ export default function RootLayout({
       lang="pt-br"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* ✅ Google Ads base script */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17637289533"
+        />
+
+        <Script id="google-ads" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'AW-17637289533');
+          `}
+        </Script>
+      </head>
+
       <body className="min-h-full flex flex-col bg-white">
+        <GoogleAdsEvents />
         {children}
         <Footer />
       </body>
-      <GoogleAdsEvents />
 
+      {/* ✅ GA4 (CORRETO USAR COMPONENTE AQUI) */}
       <GoogleAnalytics gaId="G-DSCBP92BBR" />
-
-      {/* Google Ads */}
-      <GoogleAnalytics gaId="AW-18052353513" />
     </html>
   );
 }
