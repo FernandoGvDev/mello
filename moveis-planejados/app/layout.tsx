@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import GoogleAdsEvents from "./GoogleAdsEvents";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
   /* 🟢 TÍTULO PRINCIPAL (IMPORTANTE PARA GOOGLE) */
   title: {
     default: "Móveis Planejados Mello | Sob Medida com Qualidade e Garantia",
-    template: "%s | Móveis Planejados Mello", 
+    template: "%s | Móveis Planejados Mello",
     // 👉 Permite páginas internas tipo: "Projetos | Móveis Planejados Mello"
   },
 
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
     siteName: "Móveis Planejados Mello",
     images: [
       {
-        url: "/imgs/salabase.png", 
+        url: "/imgs/salabase.png",
         // ⚠️ CRIE ESSA IMAGEM (1200x630 ideal)
         width: 1200,
         height: 630,
@@ -81,7 +82,7 @@ export const metadata: Metadata = {
 
   /* 🟢 FAVICON */
   icons: {
-    icon: "/logo.svg", 
+    icon: "/logo.svg",
   },
 };
 
@@ -97,10 +98,14 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-white">
         {children}
-        <Footer />       
+        <Footer />
       </body>
+      <GoogleAdsEvents />
 
-<GoogleAnalytics gaId="G-DSCBP92BBR" />
+      <GoogleAnalytics gaId="G-DSCBP92BBR" />
+
+      {/* Google Ads */}
+      <GoogleAnalytics gaId="AW-18052353513" />
     </html>
   );
 }
