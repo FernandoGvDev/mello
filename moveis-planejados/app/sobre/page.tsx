@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Header from "@/components/Header";
 import {
   FaComments,
   FaDraftingCompass,
@@ -15,6 +16,7 @@ import {
 export default function Sobre() {
   return (
     <main className="w-full bg-white">
+      <Header/>
       {/* HERO */}
       <section className="relative py-32 px-6 flex items-center justify-center text-center overflow-hidden">
         <motion.div

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import Header from "@/components/Header";
 
 type Projeto = {
   src: string;
@@ -121,6 +122,7 @@ export default function ProjetosPage() {
 
   return (
     <main className="w-full bg-white">
+      <Header/>
       {/* HERO */}
       <section className="relative h-[70vh] flex items-center justify-center text-center overflow-hidden">
         <Image

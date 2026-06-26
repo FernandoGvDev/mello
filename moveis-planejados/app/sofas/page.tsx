@@ -12,6 +12,7 @@ import {
   FaPalette,
   FaTools,
 } from "react-icons/fa";
+import Header from "@/components/Header";
 
 const beneficios = [
   { icon: FaCouch, text: "Conforto personalizado" },
@@ -42,6 +43,7 @@ const sofas = [
 export default function SofasPage() {
   return (
     <main className="w-full">
+      <Header/>
 
       {/* HERO */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">

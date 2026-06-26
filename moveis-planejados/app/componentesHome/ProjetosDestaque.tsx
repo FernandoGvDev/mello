@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { FaWhatsapp, FaArrowRight } from "react-icons/fa";
 
-// 📦 Tipagem (melhora manutenção)
 type Project = {
   src: string;
   title: string;
@@ -19,141 +19,133 @@ const projects: Project[] = [
 ];
 
 export default function ProjetosDestaque() {
-  const [selected, setSelected] = useState<Project | null>(null);
-
-  // 🧠 UX: botão voltar fecha modal (mobile)
-  useEffect(() => {
-    if (!selected) return;
-
-    window.history.pushState({ modal: true }, "");
-
-    const handlePopState = () => setSelected(null);
-
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, [selected]);
-
-  // 🔐 FECHAR CENTRALIZADO (reutilizável)
-  const closeModal = () => {
-    setSelected(null);
-    window.history.back();
-  };
+  const [active, setActive] = useState(0);
 
   return (
-    <section className="w-full py-16 bg-[#f5e6d3]">
+    <section className="w-full py-24 bg-[#f5e6d3]">
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* 🧱 HEADER */}
-        <header className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1f2937] mb-4">
-            Ambientes que Transformamos
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Projetos que unem estética, funcionalidade e durabilidade.
-          </p>
-        </header>
+        {/* HEADER CONVERSIVO */}
+        <div className="text-center mb-14">
 
-        {/* 📱 MOBILE (carousel leve) */}
-        <div className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4">
-          {projects.map((project, i) => (
-            <div
-              key={i}
-              onClick={() => setSelected(project)}
-              className="min-w-[85%] h-[300px] relative rounded-xl overflow-hidden snap-center cursor-pointer"
+          <p className="text-sm font-semibold text-[#8b0000] uppercase tracking-widest">
+            Projetos reais entregues
+          </p>
+
+          <h2 className="text-3xl md:text-5xl font-black text-[#1f2937] mt-4">
+            Ambientes que mostram o resultado do nosso trabalho
+          </h2>
+
+          <p className="text-gray-600 max-w-2xl mx-auto mt-5 text-lg">
+            Cada projeto abaixo representa um cliente que hoje tem um ambiente mais funcional, bonito e bem aproveitado.
+          </p>
+        </div>
+
+        {/* LAYOUT PRINCIPAL */}
+        <div className="grid lg:grid-cols-2 gap-14 items-center">
+
+          {/* COLUNA ESQUERDA - PROVA SOCIAL */}
+          <div>
+
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="relative w-full h-[420px] rounded-3xl overflow-hidden shadow-2xl"
             >
               <Image
-                src={project.src}
-                alt={project.title}
+                src={projects[active].src}
+                alt={projects[active].title}
                 fill
-                sizes="100vw"
                 className="object-cover"
-                priority={i === 0}
               />
 
-              {/* overlay para contraste */}
-              <div className="absolute inset-0 bg-black/40 " />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
-              <div className="absolute bottom-4 left-4 text-white">
-                <h3 className="text-lg font-semibold">{project.title}</h3>
-              </div>
-            </div>
-          ))}
-        </div>
+              <div className="absolute bottom-6 left-6 text-white">
+                <h3 className="text-2xl font-bold">
+                  {projects[active].title}
+                </h3>
 
-        {/* 💻 DESKTOP GRID */}
-        <div className="hidden md:grid grid-cols-4 gap-4 auto-rows-[250px]">
-          {/* destaque */}
-          <div
-            onClick={() => setSelected(projects[0])}
-            className="relative col-span-2 row-span-2 rounded-xl overflow-hidden cursor-pointer"
-          >
-            <Image src={projects[0].src} alt="" fill className="object-cover" />
-            <div className="absolute inset-0 bg-black/40" />
-          </div>
-
-          {/* restantes */}
-          {projects.slice(1).map((project, i) => (
-            <div
-              key={i}
-              onClick={() => setSelected(project)}
-              className="relative rounded-xl overflow-hidden cursor-pointer"
-            >
-              <Image src={project.src} alt="" fill className="object-cover" />
-              <div className="absolute inset-0 bg-black/30" />
-            </div>
-          ))}
-        </div>
-
-        {/* 🎯 CTA */}
-        <div className="text-center mt-12">
-          <a
-            href="/projetos"
-            className="inline-block bg-[#8b0000] text-white px-6 py-3 rounded-full hover:scale-105 transition"
-          >
-            Ver mais projetos reais
-          </a>
-        </div>
-      </div>
-
-      {/* 🖼️ MODAL FULLSCREEN */}
-      <AnimatePresence>
-        {selected && (
-          <motion.div
-            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            {/* botão fechar */}
-            <button
-              onClick={closeModal}
-              className="absolute top-6 right-6 text-white text-3xl z-50"
-            >
-              ✕
-            </button>
-
-            {/* container central */}
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-full h-full flex items-center justify-center"
-            >
-              {/* limite elegante */}
-              <div className="relative w-full h-full max-w-6xl max-h-[90vh]">
-                <Image
-                  src={selected.src}
-                  alt={selected.title}
-                  fill
-                  sizes="100vw"
-                  className="object-contain"
-                />
+                <p className="text-white/80 text-sm mt-1">
+                  Projeto personalizado entregue para cliente real
+                </p>
               </div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
+            {/* THUMBS */}
+            <div className="flex gap-3 mt-6 flex-wrap">
+
+              {projects.map((p, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActive(i)}
+                  className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 transition ${
+                    active === i
+                      ? "border-[#8b0000] scale-105"
+                      : "border-transparent opacity-70"
+                  }`}
+                >
+                  <Image
+                    src={p.src}
+                    alt={p.title}
+                    fill
+                    className="object-cover"
+                  />
+                </button>
+              ))}
+
+            </div>
+          </div>
+
+          {/* COLUNA DIREITA - CONVERSÃO */}
+          <div>
+
+            <span className="inline-flex items-center gap-2 bg-red-100 text-[#8b0000] px-4 py-2 rounded-full font-semibold">
+              +40 anos de experiência em móveis planejados
+            </span>
+
+            <h3 className="mt-6 text-4xl md:text-5xl font-black text-[#1f2937] leading-tight">
+              Seu próximo ambiente pode ser
+              <span className="text-[#8b0000]"> exatamente assim</span>
+            </h3>
+
+            <p className="mt-6 text-lg text-gray-600 leading-relaxed">
+              Criamos projetos sob medida para aproveitar cada espaço da sua casa,
+              combinando funcionalidade, estética e durabilidade.
+            </p>
+
+            {/* BENEFÍCIOS */}
+            <div className="mt-8 space-y-4 text-gray-800">
+
+              <p>✔ Projeto personalizado para seu espaço</p>
+              <p>✔ Materiais de alta qualidade</p>
+              <p>✔ Fabricação e instalação própria</p>
+              <p>✔ Atendimento direto no WhatsApp</p>
+
+            </div>
+
+            {/* CTA FORTE */}
+            <a
+              href="https://wa.me/555591200892"
+              target="_blank"
+              className="mt-10 inline-flex items-center gap-3 bg-[#8b0000] text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition shadow-xl"
+            >
+              <FaWhatsapp size={20} />
+              Quero um projeto igual esse
+              <FaArrowRight />
+            </a>
+
+            {/* MICRO PROVA SOCIAL */}
+            <p className="mt-5 text-sm text-gray-500">
+              Atendimento rápido • Orçamento sem compromisso
+            </p>
+
+          </div>
+
+        </div>
+      </div>
     </section>
   );
 }

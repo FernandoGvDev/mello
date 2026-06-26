@@ -3,12 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { FaCheckCircle, FaWhatsapp } from "react-icons/fa";
 
 export default function Sobre() {
   return (
-    <section className="w-full py-20 bg-[#ffffff]">
+    <section className="w-full py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
 
           {/* IMAGEM */}
           <motion.div
@@ -16,7 +18,7 @@ export default function Sobre() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="relative w-full h-[350px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg"
+            className="relative w-full h-[380px] md:h-[520px] rounded-3xl overflow-hidden shadow-2xl"
           >
             <Image
               src="/imgs/sobre.jpeg"
@@ -25,43 +27,86 @@ export default function Sobre() {
               className="object-cover"
             />
 
-            {/* overlay leve */}
             <div className="absolute inset-0 bg-black/10" />
           </motion.div>
 
-          {/* TEXTO */}
+          {/* TEXTO CONVERSIVO */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1f2937] mb-4 leading-tight">
-              45 anos criando móveis sob medida
-            </h2>
 
-            <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-6">
-              Há mais de 45 anos, a Móveis Mello transforma ambientes com projetos personalizados que unem estética, funcionalidade e durabilidade.
-              Atuamos desde o projeto em 3D até a fabricação e instalação, utilizando MDF e madeira maciça para atender residências e empresas em todo o Rio Grande do Sul.
-              Nossa experiência garante qualidade, segurança e confiança em cada detalhe.
+            {/* BADGE AUTORIDADE */}
+            <p className="inline-block bg-[#8b0000]/10 text-[#8b0000] px-5 py-2 rounded-full font-semibold text-sm mb-6">
+              +45 anos de experiência em móveis planejados
             </p>
 
-            {/* LISTA DE DESTAQUES */}
-            <ul className="space-y-2 mb-8 text-sm md:text-base text-[#1f2937]">
-              <li>✔ Projetos 100% personalizados</li>
-              <li>✔ Fabricação própria</li>
-              <li>✔ Atendimento em todo RS</li>
-              <li>✔ Qualidade e acabamento premium</li>
-            </ul>
+            {/* HEADLINE ORIENTADA A CONFIANÇA */}
+            <h2 className="text-3xl md:text-5xl font-black text-[#1f2937] leading-tight">
+              Você está a um passo de ter um ambiente planejado de verdade
+            </h2>
 
-            {/* CTA */}
-            <Link
-              href="/sobre"
-              className="inline-block bg-[#8b0000] text-white px-6 py-3 rounded-full font-semibold shadow-md hover:scale-105 hover:shadow-lg transition-all duration-300"
-            >
-              Conhecer mais sobre a empresa
-            </Link>
+            {/* TEXTO REDUZIDO (SEM “HISTÓRIA LONGA”) */}
+            <p className="text-gray-600 text-lg leading-relaxed mt-6">
+              Atuamos há mais de quatro décadas criando móveis planejados sob medida,
+              unindo design, funcionalidade e acabamento de alto padrão para transformar ambientes residenciais e comerciais.
+            </p>
+
+            {/* BENEFÍCIOS DIRETOS */}
+            <div className="mt-8 space-y-4 text-[#1f2937]">
+
+              <div className="flex items-start gap-3">
+                <FaCheckCircle className="text-[#8b0000] mt-1" />
+                <p>Projetos 100% personalizados para o seu espaço</p>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <FaCheckCircle className="text-[#8b0000] mt-1" />
+                <p>Fabricação própria com controle de qualidade</p>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <FaCheckCircle className="text-[#8b0000] mt-1" />
+                <p>Atendimento direto com especialistas</p>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <FaCheckCircle className="text-[#8b0000] mt-1" />
+                <p>Entrega e instalação completa</p>
+              </div>
+
+            </div>
+
+            {/* CTA PRINCIPAL */}
+            <div className="mt-10 flex flex-col sm:flex-row gap-4">
+
+              <a
+                href="https://wa.me/555591200892"
+                target="_blank"
+                className="inline-flex items-center justify-center gap-3 bg-[#8b0000] text-white px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 transition"
+              >
+                <FaWhatsapp />
+                Falar com especialista
+              </a>
+
+              <Link
+                href="/sobre"
+                className="inline-flex items-center justify-center border-2 border-[#8b0000] text-[#8b0000] px-8 py-4 rounded-full font-semibold hover:bg-[#8b0000] hover:text-white transition"
+              >
+                Conhecer a empresa
+              </Link>
+
+            </div>
+
+            {/* MICRO SEGURANÇA */}
+            <p className="text-sm text-gray-500 mt-6">
+              Atendimento rápido • Sem compromisso • Orçamento gratuito
+            </p>
+
           </motion.div>
+
         </div>
       </div>
     </section>

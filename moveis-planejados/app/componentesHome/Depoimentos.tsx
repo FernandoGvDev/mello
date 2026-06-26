@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaQuoteLeft, FaWhatsapp } from "react-icons/fa";
 
 const depoimentos = [
   {
@@ -11,7 +11,8 @@ const depoimentos = [
   },
   {
     nome: "Mariana Souza",
-    texto: "Simplesmente perfeito. Valeu cada centavo.",
+    texto:
+      "Simplesmente perfeito. O atendimento e o resultado final foram impecáveis.",
   },
   {
     nome: "Ricardo Lima",
@@ -22,72 +23,107 @@ const depoimentos = [
 
 export default function Depoimentos() {
   return (
-    <section className="w-full py-20 bg-[#f5e6d3]">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Autoridade */}
+    <section className="w-full py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
+
+        {/* HEADER DE CONVERSÃO */}
         <div className="text-center mb-6">
-          <p className="text-[#8b0000] font-semibold">
-            ⭐ Mais de 100 clientes satisfeitos
+
+          <p className="text-[#8b0000] font-semibold uppercase tracking-widest text-sm">
+            Prova social real
           </p>
+
         </div>
 
-        {/* Header */}
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1f2937] mb-4">
-            O que nossos clientes dizem
+
+          <h2 className="text-3xl md:text-5xl font-black text-[#1f2937]">
+            Quem já fez móveis planejados com a Mello aprova o resultado
           </h2>
-          <p className="text-gray-700 max-w-2xl mx-auto">
-            A satisfação de quem já transformou seu espaço com a Mello.
+
+          <p className="text-gray-600 max-w-2xl mx-auto mt-5 text-lg">
+            Cada projeto entregue representa uma casa mais organizada, funcional e valorizada.
           </p>
+
         </div>
 
-        {/* Grid Premium */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-          {depoimentos.map((item, i) => {
-            const isMiddle = i === 1;
+        {/* GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className={`relative bg-white rounded-2xl p-6 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-xl ${
-                  isMiddle ? "md:scale-110 z-10" : "opacity-90"
-                }`}
-              >
-                {/* Stars */}
-                <div className="flex gap-1 text-[#8b0000] mb-4 relative z-10">
-                  {[...Array(5)].map((_, index) => (
-                    <FaStar key={index} />
-                  ))}
-                </div>
+          {depoimentos.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-[#f5e6d3] rounded-3xl p-8 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 relative"
+            >
 
-                {/* Text */}
-                <p className="text-gray-700 text-sm leading-relaxed mb-6 relative z-10">
-                  {item.texto}
-                </p>
+              {/* QUOTE ICON */}
+              <FaQuoteLeft className="text-[#8b0000]/20 text-4xl absolute top-6 right-6" />
 
-                {/* Name */}
-                <div className="text-[#1f2937] font-semibold text-sm relative z-10">
-                  {item.nome}
-                </div>
-              </motion.div>
-            );
-          })}
+              {/* STARS */}
+              <div className="flex gap-1 text-[#8b0000] mb-5">
+                {[...Array(5)].map((_, index) => (
+                  <FaStar key={index} />
+                ))}
+              </div>
+
+              {/* TEXTO */}
+              <p className="text-gray-800 text-sm leading-relaxed mb-6">
+                {item.texto}
+              </p>
+
+              {/* NOME */}
+              <div className="font-bold text-[#1f2937]">
+                {item.nome}
+              </div>
+
+              <p className="text-xs text-gray-500 mt-1">
+                Cliente verificado
+              </p>
+
+            </motion.div>
+          ))}
+
         </div>
 
-        {/* CTA */}
+        {/* BLOCO DE AUTORIDADE */}
+        <div className="mt-20 text-center">
+
+          <div className="inline-block bg-[#f5e6d3] px-10 py-6 rounded-2xl shadow-sm">
+
+            <p className="text-lg font-semibold text-[#1f2937]">
+              ★★★★★ +100 clientes satisfeitos
+            </p>
+
+            <p className="text-gray-600 mt-2">
+              Alto padrão de entrega, acabamento e atendimento personalizado
+            </p>
+
+          </div>
+
+        </div>
+
+        {/* CTA FORTE */}
         <div className="mt-16 text-center">
+
           <a
             href="https://wa.me/555591200892"
             target="_blank"
-            className="inline-block bg-[#8b0000] text-white px-6 py-3 rounded-full hover:scale-105 transition"
+            className="inline-flex items-center gap-3 bg-[#8b0000] text-white px-10 py-4 rounded-full font-bold hover:scale-105 transition shadow-xl"
           >
-            Solicitar orçamento agora
+            <FaWhatsapp size={20} />
+            Quero meu projeto também
           </a>
+
+          <p className="text-sm text-gray-500 mt-4">
+            Atendimento rápido • Orçamento sem compromisso
+          </p>
+
         </div>
+
       </div>
     </section>
   );
